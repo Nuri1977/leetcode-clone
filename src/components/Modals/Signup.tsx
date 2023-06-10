@@ -1,8 +1,14 @@
+import { authModalState } from '@/atoms/authModalAtom'
 import React from 'react'
+import { useSetRecoilState } from 'recoil'
 
 type Props = {}
 
 const Signup = (props: Props) => {
+  const setAuthModal = useSetRecoilState(authModalState)
+  const handleLogin = () => {
+    setAuthModal((prev) => ({ ...prev, isOpen: true, type: 'login' }))
+  }
   return (
     <form className="space-y-6 px-6 py-4">
       <h3 className="text-xl font-medium text-white">Register to LeetCode</h3>
@@ -63,7 +69,7 @@ const Signup = (props: Props) => {
       </button>
       <div className="text-sm font-medium text-gray-300">
         Already have an account? &nbsp;
-        <a href="#" className="text-blue-700 hover:underline">
+        <a href="#" className="text-blue-700 hover:underline" onClick={() => handleLogin()}>
           Log In
         </a>
       </div>
