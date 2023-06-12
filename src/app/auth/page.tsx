@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import React, { useEffect } from "react";
 import Image from "next/image";
 import Navbar from "@/components/Navbar/Navbar";
@@ -6,7 +6,7 @@ import AuthModal from "@/components/Modals/AuthModal";
 import { useRecoilValue } from "recoil";
 import { authModalState } from "@/atoms/authModalAtom";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { auth } from "@/firebase/firebaseConfig";
+import { auth } from "@/config/firebase/firebaseConfig";
 import { useRouter } from "next/navigation";
 
 type Props = {};
@@ -24,7 +24,13 @@ const AuthPage = (props: Props) => {
     if (!loading && !user) {
       setPageLoading(false);
     }
-  }, [loading, router, user])
+  }, [loading, router, user]);
+
+  useEffect(() => {
+    if (error) {
+      alert(error);
+    }
+  }, [error]);
 
   if (pageLoading) return null;
 

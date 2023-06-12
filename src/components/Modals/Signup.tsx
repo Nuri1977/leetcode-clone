@@ -1,51 +1,52 @@
-import { authModalState } from '@/atoms/authModalAtom'
-import { auth } from '@/firebase/firebaseConfig'
-import React, { useEffect } from 'react'
-import { useSetRecoilState } from 'recoil'
-import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
-import { useRouter } from 'next/navigation';
+import { authModalState } from "@/atoms/authModalAtom";
+import { auth } from "@/config/firebase/firebaseConfig";
+import React, { useEffect } from "react";
+import { useSetRecoilState } from "recoil";
+import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
+import { useRouter } from "next/navigation";
 
-type Props = {}
+type Props = {};
 
 const Signup = (props: Props) => {
   const setAuthModal = useSetRecoilState(authModalState);
   const router = useRouter();
-  const [inputs, setInputs] = React.useState({ email: '', displayName: '', password: '' })
-  const [
-    createUserWithEmailAndPassword,
-    user,
-    loading,
-    error,
-  ] = useCreateUserWithEmailAndPassword(auth);
+  const [inputs, setInputs] = React.useState({
+    email: "",
+    displayName: "",
+    password: "",
+  });
+  const [createUserWithEmailAndPassword, user, loading, error] =
+    useCreateUserWithEmailAndPassword(auth);
 
   const handleLogin = () => {
-    setAuthModal((prev) => ({ ...prev, isOpen: true, type: 'login' }))
-  }
+    setAuthModal((prev) => ({ ...prev, isOpen: true, type: "login" }));
+  };
 
   const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target
-    setInputs((prev) => ({ ...prev, [name]: value }))
-  }
+    const { name, value } = e.target;
+    setInputs((prev) => ({ ...prev, [name]: value }));
+  };
 
   const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const newUser = await createUserWithEmailAndPassword(inputs.email, inputs.password)
+      const newUser = await createUserWithEmailAndPassword(
+        inputs.email,
+        inputs.password
+      );
       if (!newUser) return;
-      setAuthModal((prev) => ({ ...prev, isOpen: false, type: 'login' }))
-      router.push('/');
+      setAuthModal((prev) => ({ ...prev, isOpen: false, type: "login" }));
+      router.push("/");
     } catch (error: any) {
-      alert(error.message)
+      alert(error.message);
     }
-  }
+  };
 
   useEffect(() => {
     if (error) {
-      alert(error.message)
+      alert(error.message);
     }
-  }, [error])
-
-
+  }, [error]);
 
   return (
     <form className="space-y-6 px-6 py-4" onSubmit={handleRegister}>
@@ -112,16 +113,20 @@ const Signup = (props: Props) => {
         className="w-full text-white focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5
       text-center bg-brand-orange hover:bg-brand-orange-s"
       >
-        {loading ? 'Loading...' : 'Register'}
+        {loading ? "Loading..." : "Register"}
       </button>
       <div className="text-sm font-medium text-gray-300">
         Already have an account? &nbsp;
-        <a href="#" className="text-blue-700 hover:underline" onClick={() => handleLogin()}>
+        <a
+          href="#"
+          className="text-blue-700 hover:underline"
+          onClick={() => handleLogin()}
+        >
           Log In
         </a>
       </div>
     </form>
-  )
-}
+  );
+};
 
-export default Signup
+export default Signup;
