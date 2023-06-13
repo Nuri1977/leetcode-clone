@@ -8,6 +8,7 @@ import { auth } from "@/config/firebase/firebaseConfig";
 import LogoutButton from "../Buttons/LogoutButton";
 import { useSetRecoilState } from "recoil";
 import { authModalState } from "@/atoms/authModalAtom";
+import Timer from "../Timer/Timer";
 
 type Props = {
   problemPage?: boolean;
@@ -73,18 +74,21 @@ const TopBar = ({ problemPage }: Props) => {
               </button>
             </Link>
           ) : (
-            <div className="cursor-pointer group relative">
-              <Image
-                src="/avatar.png"
-                alt="avatar"
-                width={32}
-                height={32}
-                className="rounded-full h-8 w-8"
-              />
-              <div className="absolute top-10 left-2/4 -translate-x-2/4 mx-auto bg-dark-layer-1 text-brand-orange p-2 rounded shadow-lg z-40 group-hover:scale-100 scale-0 transition-all duration-300 ease-in-out">
-                <p className="text-sm">{user.email}</p>
+            <>
+              {problemPage && <Timer />}
+              <div className="cursor-pointer group relative">
+                <Image
+                  src="/avatar.png"
+                  alt="avatar"
+                  width={32}
+                  height={32}
+                  className="rounded-full h-8 w-8"
+                />
+                <div className="absolute top-10 left-2/4 -translate-x-2/4 mx-auto bg-dark-layer-1 text-brand-orange p-2 rounded shadow-lg z-40 group-hover:scale-100 scale-0 transition-all duration-300 ease-in-out">
+                  <p className="text-sm">{user.email}</p>
+                </div>
               </div>
-            </div>
+            </>
           )}
         </div>
         {user && <LogoutButton />}
