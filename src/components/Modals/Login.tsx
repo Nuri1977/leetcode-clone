@@ -1,53 +1,59 @@
 import { authModalState } from "@/atoms/authModalAtom";
-import { auth } from "@/firebase/firebaseConfig";
+import { auth } from "@/config/firebase/firebaseConfig";
 import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { useSetRecoilState } from "recoil";
+import { toast } from "react-toastify";
 
 type Props = {};
 
 const Login = (props: Props) => {
-  const setAuthModal = useSetRecoilState(authModalState)
-  const router = useRouter()
-  const [inputs, setInputs] = React.useState({ email: '', password: '' })
+  const setAuthModal = useSetRecoilState(authModalState);
+  const router = useRouter();
+  const [inputs, setInputs] = React.useState({ email: "", password: "" });
 
-  const [
-    signInWithEmailAndPassword,
-    user,
-    loading,
-    error,
-  ] = useSignInWithEmailAndPassword(auth);
+  const [signInWithEmailAndPassword, user, loading, errorSignIn] =
+    useSignInWithEmailAndPassword(auth);
 
   const handleForgotPassword = () => {
-    setAuthModal((prev) => ({ ...prev, isOpen: true, type: 'forgotPassword' }))
-  }
+    setAuthModal((prev) => ({ ...prev, isOpen: true, type: "forgotPassword" }));
+  };
   const handleCreateAccount = () => {
-    setAuthModal((prev) => ({ ...prev, isOpen: true, type: 'register' }))
-  }
+    setAuthModal((prev) => ({ ...prev, isOpen: true, type: "register" }));
+  };
 
   const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target
-    setInputs((prev) => ({ ...prev, [name]: value }))
-  }
+    const { name, value } = e.target;
+    setInputs((prev) => ({ ...prev, [name]: value }));
+  };
 
   const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const user = await signInWithEmailAndPassword(inputs.email, inputs.password)
+      const user = await signInWithEmailAndPassword(
+        inputs.email,
+        inputs.password
+      );
       if (!user) return;
-      setAuthModal((prev) => ({ ...prev, isOpen: false, type: 'login' }))
-      router.push('/')
+      setAuthModal((prev) => ({ ...prev, isOpen: false, type: "login" }));
+      router.push("/");
     } catch (error: any) {
-      alert(error.message)
+      toast.error(error.message, {
+        position: "top-center",
+        autoClose: 5000,
+      });
     }
-  }
+  };
 
   useEffect(() => {
-    if (error) {
-      alert(error.message)
+    if (errorSignIn) {
+      toast.error(errorSignIn.message, {
+        position: "top-center",
+        autoClose: 5000,
+      });
     }
-  }, [error])
+  }, [errorSignIn]);
 
   return (
     <form className="space-y-6 px-6 py-4" onSubmit={handleFormSubmit}>
@@ -95,9 +101,12 @@ const Login = (props: Props) => {
         className="w-full text-white focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5
         text-center bg-brand-orange hover:bg-brand-orange-s"
       >
-        {loading ? 'Loading...' : 'Login'}
+        {loading ? "Loading..." : "Login"}
       </button>
-      <button className="flex w-full justify-end" onClick={() => handleForgotPassword()}>
+      <button
+        className="flex w-full justify-end"
+        onClick={() => handleForgotPassword()}
+      >
         <a
           href="#"
           className="text-sm block text-brand-orange hover:underline w-full text-right"
@@ -107,7 +116,11 @@ const Login = (props: Props) => {
       </button>
       <div className="text-sm font-medium text-gray-300">
         Not Registered?&nbsp;
-        <a href="#" className="text-blue-700 hover:underline" onClick={() => handleCreateAccount()}>
+        <a
+          href="#"
+          className="text-blue-700 hover:underline"
+          onClick={() => handleCreateAccount()}
+        >
           Create account
         </a>
       </div>

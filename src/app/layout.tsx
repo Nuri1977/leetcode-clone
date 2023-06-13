@@ -1,15 +1,15 @@
-import './globals.css';
-import { Lato } from 'next/font/google';
-import AppProviders from '@/providers/appProviders';
+import "./globals.css";
+import { Lato } from "next/font/google";
+import AppProviders from "@/config/providers/appProviders";
 
 const lato = Lato({
-  weight: ['100', '300', '400', '700', '900'],
-  subsets: ['latin', 'latin-ext'],
+  weight: ["100", "300", "400", "700", "900"],
+  subsets: ["latin", "latin-ext"],
 });
 
 export const metadata = {
-  title: 'LeetCode',
-  description: 'Web application that contains LeetCode problems and solutions',
+  title: "LeetCode",
+  description: "Web application that contains LeetCode problems and solutions",
 };
 
 export default function RootLayout({
@@ -18,11 +18,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang='en' suppressHydrationWarning={true}>
+    <html lang="en" suppressHydrationWarning={true}>
       <body className={lato.className}>
-        <AppProviders>
-          {children}
-        </AppProviders>
+        <AppProviders>{children}</AppProviders>
       </body>
     </html>
   );
