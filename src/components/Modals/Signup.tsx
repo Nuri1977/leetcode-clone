@@ -4,6 +4,7 @@ import React, { useEffect } from "react";
 import { useSetRecoilState } from "recoil";
 import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
 type Props = {};
 
@@ -38,13 +39,19 @@ const Signup = (props: Props) => {
       setAuthModal((prev) => ({ ...prev, isOpen: false, type: "login" }));
       router.push("/");
     } catch (error: any) {
-      alert(error.message);
+      toast.error(error.message, {
+        position: "top-center",
+        autoClose: 5000,
+      });
     }
   };
 
   useEffect(() => {
     if (error) {
-      alert(error.message);
+      toast.error(error.message, {
+        position: "top-center",
+        autoClose: 5000,
+      });
     }
   }, [error]);
 

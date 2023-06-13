@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { useSetRecoilState } from "recoil";
+import { toast } from "react-toastify";
 
 type Props = {};
 
@@ -12,7 +13,7 @@ const Login = (props: Props) => {
   const router = useRouter();
   const [inputs, setInputs] = React.useState({ email: "", password: "" });
 
-  const [signInWithEmailAndPassword, user, loading, error] =
+  const [signInWithEmailAndPassword, user, loading, errorSignIn] =
     useSignInWithEmailAndPassword(auth);
 
   const handleForgotPassword = () => {
@@ -38,15 +39,21 @@ const Login = (props: Props) => {
       setAuthModal((prev) => ({ ...prev, isOpen: false, type: "login" }));
       router.push("/");
     } catch (error: any) {
-      alert(error.message);
+      toast.error(error.message, {
+        position: "top-center",
+        autoClose: 5000,
+      });
     }
   };
 
   useEffect(() => {
-    if (error) {
-      alert(error.message);
+    if (errorSignIn) {
+      toast.error(errorSignIn.message, {
+        position: "top-center",
+        autoClose: 5000,
+      });
     }
-  }, [error]);
+  }, [errorSignIn]);
 
   return (
     <form className="space-y-6 px-6 py-4" onSubmit={handleFormSubmit}>

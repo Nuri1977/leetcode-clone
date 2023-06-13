@@ -8,6 +8,7 @@ import { authModalState } from "@/atoms/authModalAtom";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "@/config/firebase/firebaseConfig";
 import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
 type Props = {};
 
@@ -28,7 +29,10 @@ const AuthPage = (props: Props) => {
 
   useEffect(() => {
     if (error) {
-      alert(error);
+      toast.error(error.message, {
+        position: "top-center",
+        autoClose: 5000,
+      });
     }
   }, [error]);
 
