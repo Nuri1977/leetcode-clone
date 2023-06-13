@@ -55,7 +55,7 @@ const ProblemsTable = (props: Props) => {
               <td className="px-6 py4">
                 <Link
                   className="hover:text-blue-600 cursor-pointer"
-                  href={`/problem/${doc.id}`}
+                  href={`/problems/${doc.id}`}
                 >
                   {doc.title}
                 </Link>
