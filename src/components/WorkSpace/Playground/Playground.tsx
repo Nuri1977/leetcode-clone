@@ -6,10 +6,13 @@ import { vscodeDark } from "@uiw/codemirror-theme-vscode";
 import { javascript } from "@codemirror/lang-javascript";
 import EditorFooter from "./EditotFooter/EditorFooter";
 import TestCases from "./TestCases/TestCases";
+import { Problem } from "@/interfaces/problems";
 
-type Props = {};
+type Props = {
+  problem: Problem;
+};
 
-const Playground = (props: Props) => {
+const Playground = ({ problem }: Props) => {
   return (
     <div className="fleex flex-col bg-dark-layer-1 relative overflow-x-hidden">
       <PreferenceNav />
@@ -21,13 +24,13 @@ const Playground = (props: Props) => {
       >
         <div className="w-full overflow-auto">
           <CodeMirror
-            value="conts a = 1;"
+            value={problem.starterCode}
             theme={vscodeDark}
             extensions={[javascript()]}
             style={{ fontSize: 16 }}
           />
         </div>
-        <TestCases />
+        <TestCases problem={problem} />
       </Split>
       <EditorFooter />
     </div>

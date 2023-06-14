@@ -1,34 +1,37 @@
+import { Problem } from "@/interfaces/problems";
 import React from "react";
 
-const problem = {
-  id: "1",
-  title: "Two Sum",
-  difficulty: "Easy",
-  category: "Array",
-  description:
-    "Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.",
-  examples: [
-    {
-      id: "1",
-      input: "[2,7,11,15]",
-      output: "9",
-    },
-    {
-      id: "2",
-      input: "[3,2,4]",
-      output: "6",
-    },
-    {
-      id: "3",
-      input: "[3,3]",
-      output: "6",
-    },
-  ],
+// const problem = {
+//   id: "1",
+//   title: "Two Sum",
+//   difficulty: "Easy",
+//   category: "Array",
+//   description:
+//     "Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.",
+//   examples: [
+//     {
+//       id: "1",
+//       input: "[2,7,11,15]",
+//       output: "9",
+//     },
+//     {
+//       id: "2",
+//       input: "[3,2,4]",
+//       output: "6",
+//     },
+//     {
+//       id: "3",
+//       input: "[3,3]",
+//       output: "6",
+//     },
+//   ],
+// };
+
+type Props = {
+  problem: Problem;
 };
 
-type Props = {};
-
-const TestCases = (props: Props) => {
+const TestCases = ({ problem }: Props) => {
   const [activeTestCaseId, setActiveTestCaseId] = React.useState<number>(0);
 
   return (
@@ -70,13 +73,11 @@ const TestCases = (props: Props) => {
       <div className="font-semibold my-4">
         <p className="text-sm font-medium mt-4 text-white">Input:</p>
         <div className="w-full cursor-text rounded-lg border px-3 py-[10px] bg-dark-fill-3 border-transparent text-white mt-2">
-          {/* {problem.examples[activeTestCaseId].inputText} */}
-          Input Text
+          {problem.examples[activeTestCaseId].inputText}
         </div>
         <p className="text-sm font-medium mt-4 text-white">Output:</p>
         <div className="w-full cursor-text rounded-lg border px-3 py-[10px] bg-dark-fill-3 border-transparent text-white mt-2">
-          {/* {problem.examples[activeTestCaseId].outputText} */}
-          Output Text
+          {problem.examples[activeTestCaseId].outputText}
         </div>
       </div>
     </div>
