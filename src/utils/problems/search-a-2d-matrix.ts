@@ -1,6 +1,6 @@
 import assert from "assert";
-import example1 from "@/public/search-a-2d-1.jpg";
-import example2 from "@/public/search-a-2d-2.jpg";
+import example1 from "../images/search-a-2d-1.jpeg";
+import example2 from "../images/search-a-2d-2.jpeg";
 import { Problem } from "@/interfaces/problems";
 
 export const search2DMatrixHandler = (fn: any) => {

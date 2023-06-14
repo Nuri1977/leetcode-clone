@@ -1,3 +1,4 @@
+import { Problem } from "@/interfaces/problems";
 import React from "react";
 import {
   AiFillDislike,
@@ -7,9 +8,11 @@ import {
 } from "react-icons/ai";
 import { BsCheck2Circle } from "react-icons/bs";
 
-type Props = {};
+type Props = {
+  problem: Problem;
+};
 
-const ProblemDescription = (props: Props) => {
+const ProblemDescription = ({ problem }: Props) => {
   return (
     <div className="bg-dark-layer-1">
       {/* TAB */}
@@ -29,7 +32,7 @@ const ProblemDescription = (props: Props) => {
           <div className="w-full">
             <div className="flex space-x-4">
               <div className="flex-1 mr-2 text-lg text-white font-medium">
-                {"Problem Title"}
+                {problem.title}
               </div>
             </div>
             {/* {!loading && currentProblem && ( */}
@@ -100,13 +103,12 @@ const ProblemDescription = (props: Props) => {
             {/* Problem Statement(paragraphs) */}
             <div className="text-white text-sm">
               <div
-              // dangerouslySetInnerHTML={{ __html: problem.problemStatement }}
+                dangerouslySetInnerHTML={{ __html: problem.problemStatement }}
               />
-              Problem Statemnt
             </div>
 
             {/* Examples */}
-            {/* <div className="mt-4">
+            <div className="mt-4">
               {problem.examples.map((example, index) => (
                 <div key={example.id}>
                   <p className="font-medium text-white ">
@@ -131,16 +133,15 @@ const ProblemDescription = (props: Props) => {
                   </div>
                 </div>
               ))}
-            </div> */}
+            </div>
 
             {/* Constraints */}
             <div className="my-8 pb-4">
               <div className="text-white text-sm font-medium">Constraints:</div>
               <ul className="text-white ml-5 list-disc ">
                 <div
-                //   dangerouslySetInnerHTML={{ __html: problem.constraints }}
+                  dangerouslySetInnerHTML={{ __html: problem.constraints }}
                 />
-                Problem Constraints
               </ul>
             </div>
           </div>
