@@ -1,18 +1,13 @@
-export type Problem = {
-  id: string;
-  title: string;
-  difficulty: string;
-  category: string;
-  order: number;
-  videoId?: string;
-};
+import { DBProblem, Problem } from "@/interfaces/problems";
 
-export const problems: Problem[] = [
+export const problems: DBProblem[] = [
   {
     id: "two-sum",
     title: "Two Sum",
     difficulty: "Easy",
     category: "Array",
+    likes: 0,
+    dislikes: 0,
     order: 1,
     videoId: "8-k1C6ehKuw",
   },
@@ -21,6 +16,8 @@ export const problems: Problem[] = [
     title: "Reverse Linked List",
     difficulty: "Hard",
     category: "Linked List",
+    likes: 0,
+    dislikes: 0,
     order: 2,
     videoId: "",
   },
@@ -29,6 +26,8 @@ export const problems: Problem[] = [
     title: "Jump Game",
     difficulty: "Medium",
     category: "Dynamic Programming",
+    likes: 0,
+    dislikes: 0,
     order: 3,
     videoId: "",
   },
@@ -37,6 +36,8 @@ export const problems: Problem[] = [
     title: "Valid Parentheses",
     difficulty: "Easy",
     category: "Stack",
+    likes: 0,
+    dislikes: 0,
     order: 4,
     videoId: "xty7fr-k0TU",
   },
@@ -45,6 +46,8 @@ export const problems: Problem[] = [
     title: "Search a 2D Matrix",
     difficulty: "Medium",
     category: "Binary Search",
+    likes: 0,
+    dislikes: 0,
     order: 5,
     videoId: "ZfFl4torNg4",
   },
@@ -53,6 +56,8 @@ export const problems: Problem[] = [
     title: "Container With Most Water",
     difficulty: "Medium",
     category: "Two Pointers",
+    likes: 0,
+    dislikes: 0,
     order: 6,
     videoId: "",
   },
@@ -61,6 +66,8 @@ export const problems: Problem[] = [
     title: "Merge Intervals",
     difficulty: "Medium",
     category: "intervals",
+    likes: 0,
+    dislikes: 0,
     order: 7,
     videoId: "",
   },
@@ -69,6 +76,8 @@ export const problems: Problem[] = [
     title: "Maximum Depth of Binary Tree",
     difficulty: "Easy",
     category: "Tree",
+    likes: 0,
+    dislikes: 0,
     order: 8,
     videoId: "4qYTqOiRMoM",
   },
@@ -77,6 +86,8 @@ export const problems: Problem[] = [
     title: "Best Time to Buy and Sell Stock",
     difficulty: "Easy",
     category: "Array",
+    likes: 0,
+    dislikes: 0,
     order: 9,
     videoId: "",
   },
@@ -85,6 +96,8 @@ export const problems: Problem[] = [
     title: "Subsets",
     difficulty: "Medium",
     category: "Backtracking",
+    likes: 0,
+    dislikes: 0,
     order: 10,
     videoId: "",
   },
