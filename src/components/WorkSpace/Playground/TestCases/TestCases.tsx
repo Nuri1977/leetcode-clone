@@ -1,37 +1,12 @@
-import { Problem } from "@/interfaces/problems";
+import { DBProblem, Problem } from "@/interfaces/problems";
 import React from "react";
-
-// const problem = {
-//   id: "1",
-//   title: "Two Sum",
-//   difficulty: "Easy",
-//   category: "Array",
-//   description:
-//     "Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.",
-//   examples: [
-//     {
-//       id: "1",
-//       input: "[2,7,11,15]",
-//       output: "9",
-//     },
-//     {
-//       id: "2",
-//       input: "[3,2,4]",
-//       output: "6",
-//     },
-//     {
-//       id: "3",
-//       input: "[3,3]",
-//       output: "6",
-//     },
-//   ],
-// };
 
 type Props = {
   problem: Problem;
+  problemDB: DBProblem | undefined;
 };
 
-const TestCases = ({ problem }: Props) => {
+const TestCases = ({ problem, problemDB }: Props) => {
   const [activeTestCaseId, setActiveTestCaseId] = React.useState<number>(0);
 
   return (
