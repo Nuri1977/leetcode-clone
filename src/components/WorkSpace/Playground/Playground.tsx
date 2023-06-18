@@ -6,13 +6,14 @@ import { vscodeDark } from "@uiw/codemirror-theme-vscode";
 import { javascript } from "@codemirror/lang-javascript";
 import EditorFooter from "./EditotFooter/EditorFooter";
 import TestCases from "./TestCases/TestCases";
-import { Problem } from "@/interfaces/problems";
+import { DBProblem, Problem } from "@/interfaces/problems";
 
 type Props = {
   problem: Problem;
+  problemDB: DBProblem | undefined;
 };
 
-const Playground = ({ problem }: Props) => {
+const Playground = ({ problem, problemDB }: Props) => {
   return (
     <div className="fleex flex-col bg-dark-layer-1 relative overflow-x-hidden">
       <PreferenceNav />
@@ -30,7 +31,7 @@ const Playground = ({ problem }: Props) => {
             style={{ fontSize: 16 }}
           />
         </div>
-        <TestCases problem={problem} />
+        <TestCases problem={problem} problemDB={problemDB} />
       </Split>
       <EditorFooter />
     </div>

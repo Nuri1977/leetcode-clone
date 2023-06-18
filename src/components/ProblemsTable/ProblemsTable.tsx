@@ -1,21 +1,23 @@
 "use client";
 import React, { useEffect } from "react";
-import { Problem, problems } from "@/data/problems";
 import { BsCheckCircle } from "react-icons/bs";
 import Link from "next/link";
 import { AiFillYoutube } from "react-icons/ai";
 import YouTube, { YouTubeProps } from "react-youtube";
 import { IoClose } from "react-icons/io5";
+import { DBProblem } from "@/interfaces/problems";
 
-type Props = {};
+type Props = {
+  problemsDB: DBProblem[];
+};
 
-const ProblemsTable = (props: Props) => {
+const ProblemsTable = ({ problemsDB }: Props) => {
   const [showVideo, setShowVideo] = React.useState({
     isOpen: false,
     videoId: "",
   });
 
-  const difficultyColor = (doc: Problem) => {
+  const difficultyColor = (doc: DBProblem) => {
     switch (doc.difficulty) {
       case "Easy":
         return "text-dark-green-s";
@@ -43,7 +45,7 @@ const ProblemsTable = (props: Props) => {
   return (
     <>
       <tbody className="text-white">
-        {problems.map((doc, index) => {
+        {problemsDB.map((doc, index) => {
           return (
             <tr
               className={`${index % 2 == 1 ? "bg-dark-layer-1" : ""}`}
@@ -55,8 +57,11 @@ const ProblemsTable = (props: Props) => {
               <td className="px-6 py4">
                 <Link
                   className="hover:text-blue-600 cursor-pointer"
-                  href={`/problems/${doc.id}`}
+                  href={`${!doc?.link ? `/problems/${doc.id}` : `${doc.link}`}`}
+                  target={`${!doc?.link ? `_self` : `_blank`}`}
                 >
+                  {doc.order}
+                  {". "}
                   {doc.title}
                 </Link>
               </td>

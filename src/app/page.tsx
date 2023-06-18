@@ -1,7 +1,10 @@
 import ProblemsTable from "@/components/ProblemsTable/ProblemsTable";
 import TopBar from "@/components/TopBar/TopBar";
+import { getProblems } from "@/lib/services";
 
-export default function Home() {
+export default async function Home() {
+  const problemsDB = await getProblems();
+
   return (
     <main className="bg-dark-layer-2 min-h-screen">
       <TopBar />
@@ -33,7 +36,7 @@ export default function Home() {
               </th>
             </tr>
           </thead>
-          <ProblemsTable />
+          <ProblemsTable problemsDB={problemsDB} />
         </table>
       </div>
     </main>

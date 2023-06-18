@@ -1,4 +1,4 @@
-import { Problem } from "@/interfaces/problems";
+import { DBProblem, Problem } from "@/interfaces/problems";
 import React from "react";
 import {
   AiFillDislike,
@@ -10,9 +10,10 @@ import { BsCheck2Circle } from "react-icons/bs";
 
 type Props = {
   problem: Problem;
+  problemDB: DBProblem | undefined;
 };
 
-const ProblemDescription = ({ problem }: Props) => {
+const ProblemDescription = ({ problem, problemDB }: Props) => {
   return (
     <div className="bg-dark-layer-1">
       {/* TAB */}
@@ -35,60 +36,60 @@ const ProblemDescription = ({ problem }: Props) => {
                 {problem.title}
               </div>
             </div>
-            {/* {!loading && currentProblem && ( */}
-            <div className="flex items-center mt-3">
-              <div
-                className={`inline-block rounded-[21px] bg-opacity-[.15] px-2.5 py-1 text-xs font-medium capitalize `}
-              >
-                {"Easy"}
-              </div>
-              {/* {(solved || _solved) && ( */}
-              <div className="rounded p-[3px] ml-4 text-lg transition-colors duration-200 text-green-s text-dark-green-s">
-                <BsCheck2Circle />
-              </div>
-              {/* )} */}
-              <div
-                className="flex items-center cursor-pointer hover:bg-dark-fill-3 space-x-1 rounded p-[3px]  ml-4 text-lg transition-colors duration-200 text-dark-gray-6"
-                //   onClick={handleLike}
-              >
-                {/* {liked && !updating && ( */}
-                <AiFillLike className="text-dark-blue-s" />
+            {problemDB && (
+              <div className="flex items-center mt-3">
+                <div
+                  className={`inline-block rounded-[21px] bg-opacity-[.15] px-2.5 py-1 text-xs font-medium capitalize `}
+                >
+                  {"Easy"}
+                </div>
+                {/* {(solved || _solved) && ( */}
+                <div className="rounded p-[3px] ml-4 text-lg transition-colors duration-200 text-green-s text-dark-green-s">
+                  <BsCheck2Circle />
+                </div>
                 {/* )} */}
-                {/* {!liked && !updating && <AiFillLike />} */}
-                {/* {updating && ( */}
-                {/* <AiOutlineLoading3Quarters className="animate-spin" /> */}
-                {/* )} */}
+                <div
+                  className="flex items-center cursor-pointer hover:bg-dark-fill-3 space-x-1 rounded p-[3px]  ml-4 text-lg transition-colors duration-200 text-dark-gray-6"
+                  //   onClick={handleLike}
+                >
+                  {/* {liked && !updating && ( */}
+                  <AiFillLike className="text-dark-blue-s" />
+                  {/* )} */}
+                  {/* {!liked && !updating && <AiFillLike />} */}
+                  {/* {updating && ( */}
+                  {/* <AiOutlineLoading3Quarters className="animate-spin" /> */}
+                  {/* )} */}
 
-                <span className="text-xs">{"0"}</span>
-              </div>
-              <div
-                className="flex items-center cursor-pointer hover:bg-dark-fill-3 space-x-1 rounded p-[3px]  ml-4 text-lg transition-colors duration-200 text-green-s text-dark-gray-6"
-                //   onClick={handleDislike}
-              >
-                {/* {disliked && !updating && ( */}
-                <AiFillDislike className="text-dark-blue-s" />
-                {/* )} */}
-                {/* {!disliked && !updating && <AiFillDislike />} */}
-                {/* {updating && ( */}
-                {/* <AiOutlineLoading3Quarters className="animate-spin" /> */}
-                {/* )} */}
+                  <span className="text-xs">{"0"}</span>
+                </div>
+                <div
+                  className="flex items-center cursor-pointer hover:bg-dark-fill-3 space-x-1 rounded p-[3px]  ml-4 text-lg transition-colors duration-200 text-green-s text-dark-gray-6"
+                  //   onClick={handleDislike}
+                >
+                  {/* {disliked && !updating && ( */}
+                  <AiFillDislike className="text-dark-blue-s" />
+                  {/* )} */}
+                  {/* {!disliked && !updating && <AiFillDislike />} */}
+                  {/* {updating && ( */}
+                  {/* <AiOutlineLoading3Quarters className="animate-spin" /> */}
+                  {/* )} */}
 
-                <span className="text-xs">{"2"}</span>
+                  <span className="text-xs">{"2"}</span>
+                </div>
+                <div
+                  className="cursor-pointer hover:bg-dark-fill-3  rounded p-[3px]  ml-4 text-xl transition-colors duration-200 text-green-s text-dark-gray-6 "
+                  //   onClick={handleStar}
+                >
+                  {/* {starred && !updating && ( */}
+                  <AiFillStar className="text-dark-yellow" />
+                  {/* )} */}
+                  {/* {!starred && !updating && <TiStarOutline />} */}
+                  {/* {updating && ( */}
+                  {/* <AiOutlineLoading3Quarters className="animate-spin" /> */}
+                  {/* )} */}
+                </div>
               </div>
-              <div
-                className="cursor-pointer hover:bg-dark-fill-3  rounded p-[3px]  ml-4 text-xl transition-colors duration-200 text-green-s text-dark-gray-6 "
-                //   onClick={handleStar}
-              >
-                {/* {starred && !updating && ( */}
-                <AiFillStar className="text-dark-yellow" />
-                {/* )} */}
-                {/* {!starred && !updating && <TiStarOutline />} */}
-                {/* {updating && ( */}
-                {/* <AiOutlineLoading3Quarters className="animate-spin" /> */}
-                {/* )} */}
-              </div>
-            </div>
-            {/* )} */}
+            )}
 
             {/* {loading && (
               <div className="mt-3 flex space-x-2">
