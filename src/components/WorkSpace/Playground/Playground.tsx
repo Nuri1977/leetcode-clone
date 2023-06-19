@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import PreferenceNav from "./PreferenceNav/PreferenceNav";
 import Split from "react-split";
 import CodeMirror from "@uiw/react-codemirror";
@@ -14,6 +14,7 @@ import { useParams } from "next/navigation";
 import { problemsPaths } from "@/utils/problems";
 import { arrayUnion, doc, updateDoc } from "firebase/firestore";
 import useLocalStorage from "@/hooks/useLocalStorage";
+import { ISettings } from "@/interfaces/settings";
 
 type Props = {
   problem: Problem;
@@ -34,6 +35,12 @@ const Playground = ({
     `code-${pid}`,
     problem.starterCode
   );
+  const [fontSize, setFontSize] = useLocalStorage("lcc-fontSize", "16px");
+  const [settings, setSettings] = useState<ISettings>({
+    fontSize: fontSize,
+    settingsModalIsOpen: false,
+    dropdownIsOpen: false,
+  });
 
   const hadleSubmit = async () => {
     if (!user) {
@@ -78,9 +85,13 @@ const Playground = ({
     setUserCode(value);
   };
 
+  useEffect(() => {
+    setSettings((prev) => ({ ...prev, fontSize: fontSize }));
+  }, [fontSize]);
+
   return (
     <div className="fleex flex-col bg-dark-layer-1 relative overflow-x-hidden">
-      <PreferenceNav />
+      <PreferenceNav settings={settings} setSettings={setSettings} />
       <Split
         className="h-[calc(100vh-94px)]"
         direction="vertical"
@@ -92,7 +103,7 @@ const Playground = ({
             value={userCode}
             theme={vscodeDark}
             extensions={[javascript()]}
-            style={{ fontSize: 16 }}
+            style={{ fontSize: settings.fontSize }}
             onChange={handleOnCodeChange}
           />
         </div>
