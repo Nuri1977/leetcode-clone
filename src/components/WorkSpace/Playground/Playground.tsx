@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import PreferenceNav from "./PreferenceNav/PreferenceNav";
 import Split from "react-split";
 import CodeMirror from "@uiw/react-codemirror";
@@ -13,6 +13,7 @@ import { toast } from "react-toastify";
 import { useParams } from "next/navigation";
 import { problemsPaths } from "@/utils/problems";
 import { arrayUnion, doc, updateDoc } from "firebase/firestore";
+import useLocalStorage from "@/hooks/useLocalStorage";
 
 type Props = {
   problem: Problem;
@@ -29,7 +30,10 @@ const Playground = ({
 }: Props) => {
   const [user] = useAuthState(auth);
   const { pid } = useParams();
-  const [userCode, setUserCode] = useState(problem.starterCode);
+  const [userCode, setUserCode] = useLocalStorage(
+    `code-${pid}`,
+    problem.starterCode
+  );
 
   const hadleSubmit = async () => {
     if (!user) {
@@ -79,7 +83,7 @@ const Playground = ({
       >
         <div className="w-full overflow-auto">
           <CodeMirror
-            value={problem.starterCode}
+            value={userCode}
             theme={vscodeDark}
             extensions={[javascript()]}
             style={{ fontSize: 16 }}
