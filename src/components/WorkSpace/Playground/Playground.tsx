@@ -43,22 +43,28 @@ const Playground = ({
       });
     } else {
       try {
-        const callBackFn = new Function(`return ${userCode}`)();
-        const result = problemsPaths[pid as string].handlerFunction(callBackFn);
-        if (result) {
-          toast.success("Congratulations! All tests passed", {
-            position: "top-center",
-            autoClose: 3000,
-          });
-          setShowConfetti(true);
-          setSolved(true);
-          setTimeout(() => {
-            setShowConfetti(false);
-          }, 4000);
-          const userRef = doc(db, "users", user.uid);
-          await updateDoc(userRef, {
-            solvedProblems: arrayUnion(pid),
-          });
+        let userCodeNoComments = userCode.slice(
+          userCode.indexOf(problem.starterFunctionName)
+        );
+        const callBackFn = new Function(`return ${userCodeNoComments}`)();
+        const handler = problemsPaths[pid as string].handlerFunction;
+        if (typeof handler === "function") {
+          const result = handler(callBackFn);
+          if (result) {
+            toast.success("Congratulations! All tests passed", {
+              position: "top-center",
+              autoClose: 3000,
+            });
+            setShowConfetti(true);
+            setSolved(true);
+            setTimeout(() => {
+              setShowConfetti(false);
+            }, 4000);
+            const userRef = doc(db, "users", user.uid);
+            await updateDoc(userRef, {
+              solvedProblems: arrayUnion(pid),
+            });
+          }
         }
       } catch (error: any) {
         toast.error(error.message, {
