@@ -9,6 +9,9 @@ import LogoutButton from "../Buttons/LogoutButton";
 import { useSetRecoilState } from "recoil";
 import { authModalState } from "@/atoms/authModalAtom";
 import Timer from "../Timer/Timer";
+import { Problem } from "@/interfaces/problems";
+import { problemsPaths as problems } from "@/utils/problems";
+import { useParams, useRouter } from "next/navigation";
 
 type Props = {
   problemPage?: boolean;
@@ -17,6 +20,31 @@ type Props = {
 const TopBar = ({ problemPage }: Props) => {
   const [user, loading, error] = useAuthState(auth);
   const setAuthModal = useSetRecoilState(authModalState);
+  const params = useParams();
+  const router = useRouter();
+
+  const handleProblemChange = (isForward: boolean) => {
+    const { order } = problems[params.pid as string] as Problem;
+    const direction = isForward ? 1 : -1;
+    const nextProblemOrder = order + direction;
+    const nextProblemKey = Object.keys(problems).find(
+      (key) => problems[key].order === nextProblemOrder
+    );
+
+    if (isForward && !nextProblemKey) {
+      const firstProblemKey = Object.keys(problems).find(
+        (key) => problems[key].order === 1
+      );
+      router.push(`/problems/${firstProblemKey}`);
+    } else if (!isForward && !nextProblemKey) {
+      const lastProblemKey = Object.keys(problems).find(
+        (key) => problems[key].order === Object.keys(problems).length
+      );
+      router.push(`/problems/${lastProblemKey}`);
+    } else {
+      router.push(`/problems/${nextProblemKey}`);
+    }
+  };
 
   return (
     <nav className="relative flex h-[50px] w-full shrink-0 items-center px-5 bg-dark-layer-1 text-dark-gray-7">
@@ -31,7 +59,7 @@ const TopBar = ({ problemPage }: Props) => {
         {problemPage && (
           <div className="flex items-center gap-4 flex-1 justify-center">
             <div className="flex items-center justify-center rounded bg-dark-fill-3 hover:bg-dark-fill-2 h-8 w-8 cursor-pointer">
-              <FaChevronLeft />
+              <FaChevronLeft onClick={() => handleProblemChange(false)} />
             </div>
             <Link
               href="/"
@@ -43,7 +71,7 @@ const TopBar = ({ problemPage }: Props) => {
               <p>Problem List</p>
             </Link>
             <div className="flex items-center justify-center rounded bg-dark-fill-3 hover:bg-dark-fill-2 h-8 w-8 cursor-pointer">
-              <FaChevronRight />
+              <FaChevronRight onClick={() => handleProblemChange(true)} />
             </div>
           </div>
         )}
