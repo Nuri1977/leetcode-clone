@@ -26,9 +26,10 @@ import RectangleSkeleton from "@/components/Skeletons/RectangleSceleton";
 type Props = {
   problem: Problem;
   problemDB: DBProblem | undefined; // is not used, we use client side fetching
+  solvedLocal: boolean;
 };
 
-const ProblemDescription = ({ problem, problemDB }: Props) => {
+const ProblemDescription = ({ problem, problemDB, solvedLocal }: Props) => {
   const [user] = useAuthState(auth);
   const { currentProblem, loading, problemDifficultyClass, setCurrentProblem } =
     useGetCurrentProblem(problem.id);
@@ -228,7 +229,7 @@ const ProblemDescription = ({ problem, problemDB }: Props) => {
                 >
                   {currentProblem.difficulty}
                 </div>
-                {solved && (
+                {(solved || solvedLocal) && (
                   <div className="rounded p-[3px] ml-4 text-lg transition-colors duration-200 text-green-s text-dark-green-s">
                     <BsCheck2Circle />
                   </div>
