@@ -1,34 +1,61 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# LeetCode Clone
 
-## Getting Started
+## General info
 
-First, run the development server:
+Welcome to the LeetCode Clone project! This is a platform designed for coding enthusiasts to solve coding problems and challenges, built using Next.js, Firebase Auth, and Firestore.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+## Live preview
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+[link](https://affectionate-raman-1eac0c.netlify.app/)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Screenshots
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+![Example screenshot](public/main-page.png)
+![Example screenshot](public/problem-page.png)
 
-## Learn More
+## Technologies
 
-To learn more about Next.js, take a look at the following resources:
+Project is created with:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- React
+- NextJS
+- Typescript
+- TailwindCSS
+- Firabse
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Setup
 
-## Deploy on Vercel
+To set up the LeetCode Clone project locally, follow these steps:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Clone the repository: git clone https://github.com/Nuri1977/leetcode-clone.git
+- Install dependencies: cd leetcode-clone then npm install
+- Set up Firebase project and obtain necessary credentials (Firebase Auth and Firestore).
+- Configure Firebase credentials in the project (refer to documentation for details).
+- Start the development server: npm run dev
+- Access the project at http://localhost:3000.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Author
+
+👤 **Nuri Lacka**
+
+- GitHub: [@Nuri1977](https://github.com/Nuri1977)
+- Twitter: [@Lackanuri](https://twitter.com/LackaNuri)
+- LinkedIn: [@nurilacka](https://www.linkedin.com/in/nuri-lacka-7141b01ba/)
+
+## 🤝 Contributing
+
+Contributions, issues, and feature requests are welcome!
+
+Feel free to check the [issues page]().
+
+## Show your support
+
+Give a ⭐️ if you like this project!
+
+## Acknowledgments
+
+- A special thanks to ![Burak Korkmez](https://github.com/burakorkmez/leetcode-clone-youtube).
+
+## 📝 License
+
+This project is [MIT](LICENSE) licensed.

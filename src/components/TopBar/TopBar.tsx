@@ -79,7 +79,7 @@ const TopBar = ({ problemPage }: Props) => {
         <div className="flex items-center space-x-4 flex-1 justify-end">
           <div>
             <a
-              href="https://www.buymeacoffee.com/burakorkmezz"
+              href="https://nuri-lacka.netlify.app/"
               target="_blank"
               rel="noreferrer"
               className="bg-dark-fill-3 py-1.5 px-3 cursor-pointer roundedc"
