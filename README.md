@@ -6,7 +6,7 @@ Welcome to the LeetCode Clone project! This is a platform designed for coding en
 
 ## Live preview
 
-[link](https://affectionate-raman-1eac0c.netlify.app/)
+[link](https://leetcode-clone-navy.vercel.app/)
 
 ## Screenshots
 
